@@ -2,18 +2,15 @@ version: '3.7'
 
 services:
   jenkins-master:
-    build: ./jenkins
     container_name: ${PROJECT_NAME}-master
+    # build: ./jenkins
+    image: jenkins/jenkins:latest
     volumes:
       - ./src:/var/jenkins_home
     ports:
-      - 8080:8080
-      - 50000:50000
-      # - "${MYSQL_PORT}:3306"
+      - "${JENKINS_CLIENT_PORT}:8080"
+      - "${JENKINS_SERVER_PORT}:50000"
     environment:
-      # DB_USER: ${DB_USER}
-      # DB_DATABASE: ${DB_DATABASE}
-      # MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       TZ: "Asia/Tokyo"
 
 # volumes:
