@@ -37,6 +37,14 @@ clear-src:
 	rm -r src/.cache && \
 	rm -r src/.java
 
+rebuild: # down container & remove cacahe & rebuild container.
+	docker-compose down --rmi all && \
+	rm -r src/.cache && \
+	sh ./scripts/container.sh
+
+quiet: # down jenkins.
+	curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d '{}' localhost:8080/quietDown
+
 ##############################
 # etc
 ##############################

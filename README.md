@@ -4,9 +4,10 @@
 
 # 構成
 
-| 名前 | バージョン |
+| 名前 | バージョンなど |
 | :--- | :---: |
-| MySQL | 8.0 |
+| Jenkins-Agent-Protocols | JNLP4-connect, Ping |
+| Jenkins-Version | 2.337 |
 
 ---
 # ローカル環境の構築(Mac)
@@ -44,6 +45,15 @@ $ ssh-keygen -t rsa -C ""
 
 *コンテナ再起動時もやや時間がかかる。
 
+コンテナ再起動によってクライアントにアクセス出来なくなったら、下記のコマンドでイメージごと作り直すのが良い。
+
+`/var/jenkins_hom/.cache`は削除した方が良さそう。
+
+```shell
+$ docker-compose down --rmi all
+```
+
+---
 ## `volume`の確認
 
 ```shell-session
@@ -52,3 +62,14 @@ DRIVER    VOLUME NAME
 local     local-db-store
 ```
 
+---
+
+## sshキー(公開鍵の設定)
+
+`/var/jenkins_hom/.ssh/id_rsa.pub`の情報をクライアントに貼り付けておく。
+
+```
+$ cat /var/jenkins_hom/.ssh/id_rsa.pub | pbcopy
+```
+
+---
