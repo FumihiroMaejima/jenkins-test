@@ -73,3 +73,14 @@ $ cat /var/jenkins_hom/.ssh/id_rsa.pub | pbcopy
 ```
 
 ---
+## コンテナの再起動について
+
+コンテナのダウン時にvolumeの削除とcacheの削除を実行するとコンテナ再立ち上げが上手くいく。
+
+```
+$ docker-compose -f ${DOCKER_COMPOSE_FILE} down -v
+# cacheも削除する
+$ rm -r src/.cache
+```
+
+---
