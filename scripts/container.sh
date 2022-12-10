@@ -24,7 +24,12 @@ if [[ "$(docker-compose -f ${DOCKER_COMPOSE_FILE} ps -q 2>/dev/null)" == "" ]]; 
 else
 　# コンテナが立ち上がっている状態の時
   showMessage 'Down Docker Container!'
-  docker-compose -f ${DOCKER_COMPOSE_FILE} down
+  # docker-compose -f ${DOCKER_COMPOSE_FILE} down
+
+  # jenkinsの場合、volumeを削除しないとUIが起動しなくなる。
+  docker-compose -f ${DOCKER_COMPOSE_FILE} down -v
+  # cacheも削除する
+  rm -r src/.cache
 fi
 
 # 現在のDocker コンテナの状態を出力
