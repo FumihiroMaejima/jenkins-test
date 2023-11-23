@@ -37,17 +37,17 @@ manual-up:
 	echo 'jenkis-client : http://localhost:8080'
 
 manual-stop:
-	docker-compose ./docker-compose.manual.yml stop
+	docker-compose -f ./docker-compose.manual.yml stop
 
 manual-down:
-	docker-compose ./docker-compose.manual.yml down -v && \
+	docker-compose -f ./docker-compose.manual.yml down -v && \
 	rm -r manual/home/.cache
 
 manual-down-rmi:
-	docker-compose ./docker-compose.manual.yml down --rmi all
+	docker-compose -f ./docker-compose.manual.yml down --rmi all
 
 manual-ps:
-	docker-compose ./docker-compose.manual.yml ps
+	docker-compose -f ./docker-compose.manual.yml ps
 
 ##############################
 # jenkins
