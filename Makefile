@@ -30,6 +30,26 @@ dev:
 	sh ./scripts/container.sh
 
 ##############################
+# make manual docker environmental
+##############################
+manual-up:
+	docker-compose -f ./docker-compose.manual.yml up -d && \
+	echo 'jenkis-client : http://localhost:8080'
+
+manual-stop:
+	docker-compose ./docker-compose.manual.yml stop
+
+manual-down:
+	docker-compose ./docker-compose.manual.yml down -v && \
+	rm -r manual/home/.cache
+
+manual-down-rmi:
+	docker-compose ./docker-compose.manual.yml down --rmi all
+
+manual-ps:
+	docker-compose ./docker-compose.manual.yml ps
+
+##############################
 # jenkins
 ##############################
 clear-src:
