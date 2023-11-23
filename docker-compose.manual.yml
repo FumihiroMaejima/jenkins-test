@@ -3,8 +3,9 @@ version: '3.7'
 services:
   jenkins-master:
     container_name: ${PROJECT_NAME}-master-manual
-    # build: ./jenkins
-    image: jenkins/jenkins:latest
+    platform: 'linux/amd64'
+    build: ./manual
+    # image: jenkins/jenkins:latest
     volumes:
       - ./manual/home:/var/jenkins_home
       - ./manual/scripts:/usr/local/scripts

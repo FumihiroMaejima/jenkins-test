@@ -1,14 +1,18 @@
 # FROM jenkins/jenkins:lts-alpine
-FROM jenkins/jenkins:lts-alpine-jdk11
+# FROM jenkins/jenkins:lts-alpine-jdk11
+FROM jenkins/jenkins:latest
 
-# install via apt
 USER root
 
-# install jenkins plugins
-COPY plugins.txt /usr/share/jenkins/plugins.txt
-# RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
-# RUN /usr/local/bin/install-plugins.sh /usr/share/jenkins/plugins.txt
+RUN apt-get update && \
+    apt-get install -y \
+    unzip \
+    sudo
 
-# drop back to the regular jenkins user - good practice
+# aws-cli
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+RUN unzip awscliv2.zip
+RUN sudo ./aws/install
+
 USER jenkins
 
