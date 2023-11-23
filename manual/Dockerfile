@@ -4,6 +4,7 @@ FROM jenkins/jenkins:latest
 
 USER root
 
+### パッケージをインストールするのに最低限必要なパッケージを指定しておく
 RUN apt-get update && \
     apt-get install -y \
     unzip \
