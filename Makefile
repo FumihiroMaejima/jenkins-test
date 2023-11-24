@@ -49,6 +49,9 @@ manual-down-rmi:
 manual-ps:
 	docker-compose -f ./docker-compose.manual.yml ps
 
+manual-bash-profile:
+	docker-compose exec jenkins-master bash -c '/usr/local/scripts/create-bash_profile.sh'
+
 ##############################
 # jenkins
 ##############################
