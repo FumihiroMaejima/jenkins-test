@@ -56,11 +56,11 @@ manual-ps:
 manual-bash-profile:
 	docker-compose exec jenkins-master bash -c '/usr/local/scripts/create-bash_profile.sh'
 
-manual-s3-list:
-	docker-compose exec jenkins-master bash -c '/usr/local/scripts/aws/get-aws-s3-list.sh $(TMP_PARAM)'
-
 manual-config-list:
 	docker-compose exec jenkins-master bash -c '/usr/local/scripts/aws/get-aws-config-list.sh $(TMP_PARAM)'
+
+manual-s3-list:
+	docker-compose exec jenkins-master bash -c '/usr/local/scripts/aws/get-aws-s3-list.sh $(TMP_PARAM)'
 
 ##############################
 # jenkins
