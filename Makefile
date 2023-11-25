@@ -59,13 +59,13 @@ manual-rebuild: # 個別のコンテナを作り直し
 	docker-compose -f ./docker-compose.manual.yml build --no-cache $(SEVICE_NAME)
 
 manual-bash-profile:
-	docker-compose exec jenkins-master bash -c '/usr/local/scripts/create-bash_profile.sh'
+	docker-compose exec jenkins-master bash -c '/usr/local/scripts/bash/create-bash_profile.sh'
 
 manual-config-list:
-	docker-compose exec jenkins-master bash -c '/usr/local/scripts/aws/get-aws-config-list.sh $(TMP_PARAM)'
+	docker-compose exec jenkins-master bash -c 'source ~/.bash_profile && /usr/local/scripts/aws/get-aws-config-list.sh'
 
 manual-s3-list:
-	docker-compose exec jenkins-master bash -c '/usr/local/scripts/aws/get-aws-s3-list.sh $(TMP_PARAM)'
+	docker-compose exec jenkins-master bash -c 'source ~/.bash_profile /usr/local/scripts/aws/get-aws-s3-list.sh'
 
 ##############################
 # jenkins
