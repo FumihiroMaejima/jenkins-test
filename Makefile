@@ -5,6 +5,8 @@ CMD=default
 MYSQL_VERSION80=8.0
 MYSQL_VERSION57=5.7
 
+SEVICE_NAME=jenkins-master
+
 # etc
 TMP_PARAM=
 TMP_PARAM2=
@@ -52,6 +54,9 @@ manual-down-rmi:
 
 manual-ps:
 	docker-compose -f ./docker-compose.manual.yml ps
+
+manual-rebuild: # 個別のコンテナを作り直し
+	docker-compose -f ./docker-compose.manual.yml build --no-cache $(SEVICE_NAME)
 
 manual-bash-profile:
 	docker-compose exec jenkins-master bash -c '/usr/local/scripts/create-bash_profile.sh'
