@@ -5,6 +5,12 @@ CMD=default
 MYSQL_VERSION80=8.0
 MYSQL_VERSION57=5.7
 
+SEVICE_NAME=jenkins-master
+
+# etc
+TMP_PARAM=
+TMP_PARAM2=
+
 echo:
 	@echo test
 	@date "+%m/%d/%Y %H:%M"
@@ -28,6 +34,38 @@ ps:
 
 dev:
 	sh ./scripts/container.sh
+
+##############################
+# make manual docker environmental
+##############################
+manual-up:
+	docker-compose -f ./docker-compose.manual.yml up -d && \
+	echo 'jenkis-client : http://localhost:8080'
+
+manual-stop:
+	docker-compose -f ./docker-compose.manual.yml stop
+
+manual-down:
+	docker-compose -f ./docker-compose.manual.yml down -v && \
+	rm -r manual/home/.cache
+
+manual-down-rmi:
+	docker-compose -f ./docker-compose.manual.yml down --rmi all
+
+manual-ps:
+	docker-compose -f ./docker-compose.manual.yml ps
+
+manual-rebuild: # 個別のコンテナを作り直し
+	docker-compose -f ./docker-compose.manual.yml build --no-cache $(SEVICE_NAME)
+
+manual-bash-profile:
+	docker-compose exec jenkins-master bash -c '/usr/local/scripts/bash/create-bash_profile.sh'
+
+manual-config-list:
+	docker-compose exec jenkins-master bash -c 'source ~/.bash_profile && /usr/local/scripts/aws/get-aws-config-list.sh'
+
+manual-s3-list:
+	docker-compose exec jenkins-master bash -c 'source ~/.bash_profile /usr/local/scripts/aws/get-aws-s3-list.sh'
 
 ##############################
 # jenkins
